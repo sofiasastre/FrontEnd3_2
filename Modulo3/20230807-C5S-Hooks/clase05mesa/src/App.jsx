@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import ListarElementos from './ListarElementos'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import Item from "./components/Item";
 
 function App() {
-  const [elementos, setElementos] = useState([]);
-
-  function agregarElemento() {
-    const nuevoElemento = `El punto ${elementos.length + 1} se ha añadido a la lista`;
-    setElementos([...elementos, nuevoElemento]);
-  }
-
-  function reiniciarLista(){
-    setElementos([]);
-  }
-  
+  const [items, setItems] = useState([]);
 
   return (
-    <div>
-      <h1>Actividad de Lista Dinámica</h1>
-      <button onClick={agregarElemento}>Agregar Elemento</button>
-      <button onClick={reiniciarLista}> Reinciar Lista </button>
-      <ul>
-        {elementos.map((elemento, index) => (
-          <li key={index}>{elemento}</li>
+    <div className="App">
+      <button onClick={()=>setItems((oldItemsArray)=>[...oldItemsArray,`El item ${oldItemsArray.length + 1} fue agregado a la lista`])}>
+        Click para agregar item
+      </button>
+      <button onClick={()=>setItems([])}>Resetear</button>
+      <br />
+      <h1>Items de la lista</h1>
+      <div>
+        {items.map((element, index) => (
+          <Item key={index} descripcion={element} />
         ))}
-      </ul>
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
